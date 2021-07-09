@@ -1,5 +1,7 @@
 import turtle
-import winsound
+import winsound 
+
+# Tela
 
 tela = turtle.Screen()
 tela.title("Pong em Python")
@@ -50,24 +52,42 @@ pen.write("Player I: 0 Player II: 0", align = "center", font = ("Courier", 20, "
 
 # Função para mover os paddles
 def paddle_a_up():
-    y = paddle_a.ycor()
-    y += 20
-    paddle_a.sety(y)
+    global y1
+    y1 = paddle_a.ycor()
+    y1 += 20
+    paddle_a.sety(y1)
+
 
 def paddle_a_down():
-    x = paddle_a.ycor()
-    x -= 20
-    paddle_a.sety(x)
+    global x2
+    x2 = paddle_a.ycor()
+    x2 -= 20
+    paddle_a.sety(x2)
+
 
 def paddle_b_up():
-    y = paddle_b.ycor()
-    y += 20
-    paddle_b.sety(y)
+    global y2
+    y2 = paddle_b.ycor()
+    y2 += 20
+    paddle_b.sety(y2)
+
 
 def paddle_b_down():
-    x = paddle_b.ycor()
-    x -= 20
-    paddle_b.sety(x)
+    global x1
+    x1 = paddle_b.ycor()
+    x1 -= 20
+    paddle_b.sety(x1)
+
+ # tentando criar bordas para os paddles
+    def stop_paddle_b_down():
+        if paddle_b_down > 290 or paddle_b_down < -290:
+            x1 == 0 & x2 == 0
+            return
+    
+    def stop_paddle_b_up():
+        if paddle_b_up > 290 or paddle_b_up < -290:
+            y1 == 0 & y2 == 0
+            return
 
 
 # Keyboard binding, salvando as teclas para mover
@@ -81,7 +101,7 @@ tela.onkeypress(paddle_b_down, "Down")
 while True:
     tela.update()
 
-    #Move the ball, mover a bola
+    # Move the ball, mover a bola
     bola.setx(bola.xcor() + bola.dx)
     bola.sety(bola.ycor() + bola.dy)
 
@@ -112,7 +132,7 @@ while True:
         pen.write("Player I: {} Player II: {}".format(score_a, score_b), align = "center", font = ("Courier", 20, "italic"))
 
 
-    #Paddle and ball colisions, fisica pra bola e pro paddle
+    # Paddle and ball colisions, fisica pra bola e pro paddle
     if bola.xcor() > 340 and bola.xcor() < 350 and (bola.ycor() < paddle_b.ycor() + 50 and bola.ycor() > paddle_b.ycor() -40):
         bola.setx(340)
         bola.dx *= -1
